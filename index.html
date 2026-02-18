@@ -1,1005 +1,455 @@
 <!doctype html>
-
 <html lang="fr">
-
 <head>
-
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-  <title>MaPaperasse — Choisir un plan</title>
-
+  <title>MaPaperasse — Gérer mon abonnement</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
   <style>
-
     :root{
-
       --bg:#f6f8fc;
-
       --card:#ffffff;
-
       --text:#0b1220;
-
       --muted:#5b667a;
-
       --line:#e7edf6;
-
       --line2:#dfe7f3;
-
       --brand:#1f6fff;
-
       --brandSoft: rgba(31,111,255,.12);
-
       --navy:#0d1b3a;
-
       --mint:#2ee6c6;
-
       --danger:#ef4444;
-
       --warn:#f59e0b;
-
       --shadow: 0 16px 40px rgba(11,18,32,.08);
-
       --radius:16px;
-
     }
-
     *{box-sizing:border-box}
-
-    html,body{height:100%}
-
     body{
-
       margin:0;
-
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-
       background: radial-gradient(1100px 650px at 65% -10%, rgba(46,230,198,.10), transparent 50%),
-
                   radial-gradient(900px 500px at 15% 0%, rgba(31,111,255,.12), transparent 55%),
-
                   var(--bg);
-
       color:var(--text);
-
     }
-
-    .wrap{max-width:1180px;margin:28px auto;padding:0 16px}
-
+    .wrap{max-width:1040px;margin:28px auto;padding:0 16px}
     .topbar{
-
       display:flex;align-items:center;justify-content:space-between;gap:16px;
-
       padding:12px 14px;border:1px solid var(--line);
-
       background:rgba(255,255,255,.72);backdrop-filter: blur(10px);
-
       border-radius:999px;
-
     }
-
     .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
-
     .logo{
-
       width:34px;height:34px;border-radius:10px;
-
       background: linear-gradient(135deg, var(--mint), rgba(31,111,255,.85));
-
       box-shadow: 0 10px 26px rgba(31,111,255,.22);
-
     }
-
-    .topActions{display:flex;align-items:center;gap:10px}
-
     .pill{
-
       display:inline-flex;align-items:center;gap:8px;
-
       padding:10px 12px;border-radius:999px;
-
       border:1px solid var(--line);
-
       background:#fff;color:var(--muted);
-
-      font-size:12px;font-weight:600;
-
+      font-size:12px;font-weight:700;
     }
-
-    .pill strong{color:var(--text);font-weight:800}
-
-    .hero{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;margin:18px 0 14px}
-
-    h1{margin:0;font-size:22px;letter-spacing:-.3px}
-
-    .sub{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.35}
+    .pill strong{color:var(--text);font-weight:900}
+    h1{margin:18px 0 6px;font-size:22px;letter-spacing:-.3px}
+    .sub{margin:0;color:var(--muted);font-size:13px;line-height:1.35;font-weight:600}
 
     .grid{
-
+      margin-top:14px;
       display:grid;
-
-      grid-template-columns: 420px 1fr;
-
-      gap:14px;
-
-      align-items:start;
-
-    }
-
-    .panel{
-
-      background:rgba(255,255,255,.76);
-
-      border:1px solid var(--line);
-
-      border-radius: var(--radius);
-
-      box-shadow: var(--shadow);
-
-      overflow:hidden;
-
-    }
-
-    .panelHeader{
-
-      padding:14px 14px 10px;
-
-      border-bottom:1px solid var(--line);
-
-      background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.65));
-
-    }
-
-    .panelHeaderTitle{margin:0;font-size:14px;font-weight:800;letter-spacing:-.15px}
-
-    .panelHeaderMeta{margin:6px 0 0;color:var(--muted);font-size:12px;line-height:1.35}
-
-    .panelBody{padding:12px 14px 14px}
-
-    .section{padding:12px 0;border-top:1px dashed var(--line2)}
-
-    .section:first-child{border-top:none;padding-top:0}
-
-    .sectionTitle{
-
-      margin:0 0 10px;
-
-      font-size:12px;color:var(--muted);font-weight:800;
-
-      letter-spacing:.18px;text-transform:uppercase;
-
-    }
-
-    .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0}
-
-    .row label{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);font-weight:600}
-
-    .row small{display:block;color:var(--muted);font-weight:500;font-size:12px;margin-top:2px}
-
-    input[type="checkbox"]{width:16px;height:16px;accent-color: var(--brand)}
-
-    .select{
-
-      width: 175px;
-
-      padding:10px 10px;
-
-      border-radius:12px;border:1px solid var(--line);
-
-      background:#fff;color:var(--text);
-
-      font-size:13px;font-weight:700;
-
-      outline:none;
-
-    }
-
-    .hint{
-
-      margin-top:10px;
-
-      font-size:12px;color:var(--muted);line-height:1.35;
-
-      background:rgba(31,111,255,.06);
-
-      border:1px solid rgba(31,111,255,.16);
-
-      padding:10px 10px;border-radius:12px;
-
-    }
-
-
-
-    .cards{
-
-      display:grid;
-
-      grid-template-columns: repeat(3, 1fr);
-
+      grid-template-columns: 1fr 1fr;
       gap:12px;
-
+      align-items:start;
     }
-
     .card{
-
       background:rgba(255,255,255,.86);
-
       border:1px solid var(--line);
-
       border-radius: var(--radius);
-
       box-shadow: var(--shadow);
-
-      padding:14px 14px 14px;
-
+      padding:14px;
       position:relative;
-
       overflow:hidden;
-
-      min-height: 520px;
-
     }
-
     .card::before{
-
       content:"";
-
       position:absolute;inset:-2px;
-
       background: radial-gradient(500px 220px at 70% 0%, rgba(46,230,198,.12), transparent 60%),
-
                   radial-gradient(500px 220px at 20% 0%, rgba(31,111,255,.12), transparent 60%);
-
       opacity:.9;
-
       pointer-events:none;
-
     }
-
     .card > *{position:relative}
-
-    .selected{
-
-      border:2px solid var(--brand);
-
-      box-shadow: 0 0 0 5px var(--brandSoft), var(--shadow);
-
-    }
-
+    .title{margin:0;font-size:14px;font-weight:900}
+    .muted{color:var(--muted);font-size:12px;line-height:1.35;font-weight:650;margin-top:6px}
     .badge{
-
       display:inline-flex;align-items:center;gap:8px;
-
       padding:7px 10px;border-radius:999px;
-
-      font-size:12px;font-weight:800;
-
-      background: var(--navy);color:#fff;
-
+      font-size:12px;font-weight:900;
+      background: linear-gradient(90deg, rgba(46,230,198,.95), rgba(31,111,255,.88));
+      color:#0b1220;
     }
-
-    .badge.secondary{background:#0f2c62}
-
-    .badge.mint{background: linear-gradient(90deg, rgba(46,230,198,.95), rgba(31,111,255,.88));}
-
-    .title{margin:10px 0 6px;font-size:18px;font-weight:900;letter-spacing:-.2px}
-
-    .desc{margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.35;min-height:34px}
-
-    .price{display:flex;align-items:baseline;gap:8px;margin:8px 0 2px}
-
-    .price strong{font-size:34px;font-weight:950;letter-spacing:-.7px}
-
-    .price span{color:var(--muted);font-size:12px;font-weight:700}
-
-    .btn{
-
-      width:100%;
-
-      padding:12px 12px;border-radius:14px;
-
-      border:1px solid var(--navy);
-
-      background: var(--navy);
-
-      color:#fff;font-weight:900;
-
-      cursor:pointer;
-
-      margin:10px 0 12px;
-
-    }
-
-    .btn.ghost{
-
-      background:#fff;color:var(--navy);
-
-      border:1px solid var(--line2);
-
-    }
-
-    .kpis{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-
-    .tag{
-
-      font-size:12px;font-weight:800;color:var(--muted);
-
-      padding:7px 10px;border-radius:999px;
-
+    .row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-top:10px}
+    .kv{
+      flex:1;
       border:1px solid var(--line);
-
       background:#fff;
-
+      border-radius:14px;
+      padding:10px;
     }
+    .kv .k{font-size:12px;color:var(--muted);font-weight:900}
+    .kv .v{margin-top:6px;font-size:14px;font-weight:950;letter-spacing:-.2px}
+    .divider{height:1px;background:var(--line);margin:12px 0}
 
-    .hr{height:1px;background:var(--line);margin:10px 0}
+    .qtitle{margin:0 0 10px;font-size:14px;font-weight:950;letter-spacing:-.2px}
+    .opt{
+      display:flex;align-items:flex-start;gap:10px;
+      padding:10px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#fff;
+      cursor:pointer;
+      margin:8px 0;
+    }
+    .opt:hover{border-color:rgba(31,111,255,.28)}
+    .opt input{margin-top:2px;accent-color: var(--brand)}
+    .opt b{display:block;font-size:13px;font-weight:900}
+    .opt small{display:block;color:var(--muted);font-weight:650;font-size:12px;line-height:1.25;margin-top:2px}
 
-    ul{margin:0;padding:0 0 0 18px}
-
-    li{margin:8px 0;color:var(--muted);font-size:13px;line-height:1.25;font-weight:600}
-
-    .foot{
-
+    .reco{
+      border:1px solid rgba(31,111,255,.20);
+      background: rgba(31,111,255,.06);
+      border-radius:14px;
+      padding:12px;
       margin-top:10px;
+    }
+    .recoTop{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .recoTop .label{font-size:12px;color:var(--muted);font-weight:900}
+    .recoTop .plan{font-size:14px;font-weight:950}
+    .recoBody{margin-top:8px;color:var(--muted);font-size:12px;line-height:1.35;font-weight:650}
 
+    .actions{
+      display:flex;gap:10px;flex-wrap:wrap;margin-top:12px
+    }
+    .btn{
+      flex:1;
+      min-width: 220px;
+      padding:12px 12px;border-radius:14px;
+      border:1px solid var(--navy);
+      background: var(--navy);
+      color:#fff;font-weight:950;
+      cursor:pointer;
+    }
+    .btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--line2)}
+    .btn.danger{background:#fff;color:var(--danger);border:1px solid rgba(239,68,68,.35)}
+    .selected{
+      border:2px solid var(--brand);
+      box-shadow: 0 0 0 5px var(--brandSoft), var(--shadow);
+    }
+
+    .plans{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+    }
+    .planCard{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:14px;
+      padding:12px;
+      cursor:pointer;
+    }
+    .planCard:hover{border-color:rgba(31,111,255,.28)}
+    .planName{font-weight:950;letter-spacing:-.2px}
+    .planDesc{margin-top:6px;color:var(--muted);font-size:12px;line-height:1.3;font-weight:650}
+    .planPrice{margin-top:10px;font-weight:950}
+    .hint{
+      margin-top:10px;
       color:var(--muted);
-
-      font-size:12px;line-height:1.35;
-
-      border-top:1px solid var(--line);
-
-      padding-top:10px;
-
+      font-size:12px;
+      line-height:1.35;
+      font-weight:650;
     }
 
+    .toast{
+      position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
+      background:#0b1220;color:#fff;
+      border-radius:999px;
+      padding:10px 12px;
+      font-size:12px;font-weight:800;
+      display:none;
+      box-shadow: 0 16px 40px rgba(11,18,32,.25);
+    }
 
-
-    @media (max-width:1100px){
-
+    @media (max-width:980px){
       .grid{grid-template-columns:1fr}
-
-      .cards{grid-template-columns:1fr}
-
-      .card{min-height:auto}
-
+      .plans{grid-template-columns:1fr}
+      .topbar{border-radius:18px}
     }
-
   </style>
-
 </head>
-
 <body>
-
   <div class="wrap">
-
     <div class="topbar">
-
       <div class="brand">
-
         <div class="logo"></div>
-
         <div>MaPaperasse</div>
-
       </div>
-
-      <div class="topActions">
-
-        <div class="pill">Plan recommandé : <strong id="pillPlan">Campus</strong></div>
-
-        <div class="pill">Tarification : <strong id="pillMode">par paliers</strong></div>
-
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+        <div class="pill">Plan actuel : <strong>Campus</strong></div>
+        <div class="pill">Mode : <strong>PREMIUM</strong></div>
       </div>
-
     </div>
 
-
-
-    <div class="hero">
-
-      <div>
-
-        <h1>Choisir un plan</h1>
-
-        <div class="sub">Sélectionnez ce dont vous avez besoin. Le plan le plus adapté est automatiquement mis en avant.</div>
-
-      </div>
-
-    </div>
-
-
+    <h1>Votre abonnement</h1>
+    <div class="sub">Répondez à 2 questions. On vous suggère le meilleur changement (ou aucun).</div>
 
     <div class="grid">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+          <div class="title">Votre plan actuel</div>
+          <span class="badge">Actif</span>
+        </div>
+        <div class="muted">Campus (PREMIUM) — conformité par session, alertes contextualisées, anti-bruit.</div>
 
-      <div class="panel">
-
-        <div class="panelHeader">
-
-          <div class="panelHeaderTitle">Vos besoins</div>
-
-          <div class="panelHeaderMeta">Cochez, ajustez les volumes, et comparez instantanément.</div>
-
+        <div class="row">
+          <div class="kv">
+            <div class="k">Dossiers inclus</div>
+            <div class="v" id="kvDossiers">Illimité</div>
+          </div>
+          <div class="kv">
+            <div class="k">Sessions / an</div>
+            <div class="v" id="kvSessions">25</div>
+          </div>
         </div>
 
-        <div class="panelBody" id="panelBody">
+        <div class="divider"></div>
 
+        <div class="qtitle">De quoi avez-vous plus besoin ?</div>
 
-
-          <div class="section">
-
-            <div class="sectionTitle">Volumes</div>
-
-            <div class="row">
-
-              <label>Nombre de dossiers formateurs</label>
-
-              <select class="select" id="dossiers">
-
-                <option value="10">10 dossiers</option>
-
-                <option value="25">25 dossiers</option>
-
-                <option value="50">50 dossiers</option>
-
-                <option value="100">100 dossiers</option>
-
-                <option value="illimite" selected>Illimité</option>
-
-              </select>
-
-            </div>
-
-            <div class="row">
-
-              <label>Nombre de sessions / an</label>
-
-              <select class="select" id="sessions">
-
-                <option value="0">0 session</option>
-
-                <option value="25" selected>25 sessions / an</option>
-
-                <option value="75">75 sessions / an</option>
-
-                <option value="150">150 sessions / an</option>
-
-                <option value="illimite">Illimité</option>
-
-              </select>
-
-            </div>
-
-            <div class="hint">Des volumes très élevés orientent automatiquement vers une offre sur mesure.</div>
-
+        <label class="opt">
+          <input type="radio" name="plus" value="none" checked>
+          <div>
+            <b>Rien de plus</b>
+            <small>Notre plan actuel suffit.</small>
           </div>
+        </label>
 
-
-
-          <div class="section">
-
-            <div class="sectionTitle">Socle</div>
-
-            <div class="row">
-
-              <label><input id="alertsExpiration" type="checkbox" checked> Alertes d’expiration</label>
-
-            </div>
-
-            <div class="row">
-
-              <label><input id="realTime" type="checkbox" checked> Suivi en temps réel</label>
-
-            </div>
-
-            <div class="row">
-
-              <label><input id="exportData" type="checkbox" checked> Export des données</label>
-
-            </div>
-
+        <label class="opt">
+          <input type="radio" name="plus" value="volume">
+          <div>
+            <b>Plus de volume</b>
+            <small>Plus de dossiers / sessions, besoin d’illimité.</small>
           </div>
+        </label>
 
-
-
-          <div class="section">
-
-            <div class="sectionTitle">Sessions & conformité</div>
-
-            <div class="row">
-
-              <label>
-
-                <input id="needsSessions" type="checkbox" checked>
-
-                Sessions de formation (missions datées)
-
-              </label>
-
-            </div>
-
-            <div class="row">
-
-              <label>
-
-                <input id="complianceByDates" type="checkbox" checked>
-
-                Conformité par dates (par session)
-
-              </label>
-
-            </div>
-
-            <div class="row">
-
-              <label>
-
-                <input id="filterEssential" type="checkbox" checked>
-
-                Filtre de criticité : documents essentiels
-
-              </label>
-
-            </div>
-
-            <div class="row">
-
-              <label>
-
-                <input id="filterSoon" type="checkbox" checked>
-
-                Filtre de criticité : session proche (J-30 / J-7)
-
-              </label>
-
-            </div>
-
-            <div class="row">
-
-              <label>
-
-                <input id="filterSlow" type="checkbox" checked>
-
-                Filtre de criticité : formateur habituellement lent
-
-              </label>
-
-            </div>
-
+        <label class="opt">
+          <input type="radio" name="plus" value="options">
+          <div>
+            <b>Options avancées</b>
+            <small>Base formateurs, IA, coordinateur, support dédié…</small>
           </div>
+        </label>
 
-
-
-          <div class="section">
-
-            <div class="sectionTitle">Sur mesure</div>
-
-            <div class="row">
-
-              <label><input id="trainerDb" type="checkbox"> Base de données formateurs</label>
-
-            </div>
-
-            <div class="row">
-
-              <label><input id="advancedAi" type="checkbox"> Fonctions IA avancées</label>
-
-            </div>
-
-            <div class="row">
-
-              <label><input id="coordinator" type="checkbox"> Coordinateur dédié</label>
-
-            </div>
-
-            <div class="row">
-
-              <label><input id="prioritySupport" type="checkbox"> Support prioritaire & dédié</label>
-
-            </div>
-
-            <div class="hint">Toute option “sur mesure” sélectionnée mettra en avant l’offre Groupe.</div>
-
+        <label class="opt">
+          <input type="radio" name="plus" value="custom">
+          <div>
+            <b>Sur mesure</b>
+            <small>Vous avez des contraintes spécifiques (multi-sites, gouvernance, SLA…)</small>
           </div>
+        </label>
 
+        <div class="divider"></div>
 
+        <div class="qtitle">De quoi avez-vous moins besoin ?</div>
 
-        </div>
+        <label class="opt">
+          <input type="radio" name="moins" value="none" checked>
+          <div>
+            <b>Aucune réduction</b>
+            <small>On garde les sessions et la conformité par dates.</small>
+          </div>
+        </label>
 
+        <label class="opt">
+          <input type="radio" name="moins" value="sessions">
+          <div>
+            <b>Des sessions</b>
+            <small>Vous n’avez pas de “missions datées” à piloter.</small>
+          </div>
+        </label>
+
+        <label class="opt">
+          <input type="radio" name="moins" value="contract">
+          <div>
+            <b>La conformité par session</b>
+            <small>Le statut global par profil suffit (moins contractuel).</small>
+          </div>
+        </label>
       </div>
 
+      <div class="card">
+        <div class="title">Suggestion</div>
+        <div class="muted">Basée sur vos réponses. Vous pouvez forcer un autre choix.</div>
 
-
-      <div class="cards">
-
-        <div class="card" id="cardEtab">
-
-          <span class="badge">Votre plan</span>
-
-          <div class="title">Établissement</div>
-
-          <div class="desc">Suivi des dossiers formateurs avec alertes d’expiration.</div>
-
-          <div class="price"><strong id="priceEtab">—</strong><span>HT/mois</span></div>
-
-          <button class="btn ghost" type="button">Choisir Établissement</button>
-
-          <div class="kpis" id="kpiEtab"></div>
-
-          <div class="hr"></div>
-
-          <ul id="listEtab"></ul>
-
-          <div class="foot" id="footEtab"></div>
-
+        <div class="reco" id="recoBox">
+          <div class="recoTop">
+            <div class="label">Plan suggéré</div>
+            <div class="plan" id="recoPlan">Rester sur Campus</div>
+          </div>
+          <div class="recoBody" id="recoText">
+            Vous utilisez le mode session : conserver PREMIUM évite les faux positifs et garde la conformité contractuelle.
+          </div>
         </div>
 
-
-
-        <div class="card" id="cardCampus">
-
-          <span class="badge mint">Session mode</span>
-
-          <div class="title">Campus</div>
-
-          <div class="desc">Tout Établissement + sessions de formation avec conformité.</div>
-
-          <div class="price"><strong id="priceCampus">—</strong><span>HT/mois</span></div>
-
-          <button class="btn" type="button">Changer de plan</button>
-
-          <div class="kpis" id="kpiCampus"></div>
-
-          <div class="hr"></div>
-
-          <ul id="listCampus"></ul>
-
-          <div class="foot" id="footCampus"></div>
-
+        <div class="actions">
+          <button class="btn" id="btnApply">Appliquer le plan suggéré</button>
+          <button class="btn ghost" id="btnCompare">Voir / forcer un autre plan</button>
         </div>
 
-
-
-        <div class="card" id="cardGroupe">
-
-          <span class="badge secondary">Groupe</span>
-
-          <div class="title">Sur mesure</div>
-
-          <div class="desc">Solution adaptée aux grands volumes et besoins spécifiques.</div>
-
-          <div class="price"><strong id="priceGroupe">Sur mesure</strong><span>Tarif personnalisé</span></div>
-
-          <button class="btn" type="button">Nous contacter</button>
-
-          <div class="kpis" id="kpiGroupe"></div>
-
-          <div class="hr"></div>
-
-          <ul id="listGroupe"></ul>
-
-          <div class="foot" id="footGroupe"></div>
-
+        <div class="plans" id="plans" style="display:none">
+          <div class="planCard" data-plan="etab" id="cardEtab">
+            <div class="planName">Établissement</div>
+            <div class="planDesc">Conformité globale (profil). Pas de sessions / pas de conformité par dates.</div>
+            <div class="planPrice">À partir de 29€/mois</div>
+          </div>
+          <div class="planCard selected" data-plan="campus" id="cardCampus">
+            <div class="planName">Campus</div>
+            <div class="planDesc">Conformité par session (dates). Alertes contextualisées, anti-bruit.</div>
+            <div class="planPrice">À partir de 35€/mois</div>
+          </div>
+          <div class="planCard" data-plan="groupe" id="cardGroupe">
+            <div class="planName">Groupe</div>
+            <div class="planDesc">Illimité + options sur mesure + accompagnement.</div>
+            <div class="planPrice">Sur mesure</div>
+          </div>
         </div>
 
+        <div class="hint" id="hint">
+          Le downgrade vers Établissement s’applique généralement en fin de période (sessions conservées en lecture seule).
+        </div>
       </div>
-
     </div>
-
   </div>
 
+  <div class="toast" id="toast">Choix enregistré</div>
 
+  <script>
+    const qs = (s) => document.querySelector(s);
+    const qsa = (s) => Array.from(document.querySelectorAll(s));
 
-<script>
+    let forcedPlan = null; // 'etab' | 'campus' | 'groupe' | null
 
-  const el = (id) => document.getElementById(id);
+    function pickReco() {
+      const plus = qs('input[name="plus"]:checked').value;
+      const moins = qs('input[name="moins"]:checked').value;
 
+      // Si l'utilisateur force un plan, on s'aligne sur ce choix
+      if (forcedPlan) return forcedPlan;
 
+      // Règles volontairement simples (UX > sophistication)
+      // Upgrade vers Groupe
+      if (plus === "custom" || plus === "options") return "groupe";
+      if (plus === "volume") return "groupe";
 
-  const PRICE_ETAB = { "10":29, "25":49, "50":89, "100":149, "illimite":459 };
+      // Downgrade vers Établissement si l'utilisateur dit ne pas avoir besoin des sessions/conformité session
+      if (moins === "sessions" || moins === "contract") return "etab";
 
-  const CAMPUS_PRICES = { base:35, mid:99, high:189 };
-
-
-
-  const dossiersLabel = (k) => (k==="illimite" ? "Illimité" : k + " dossiers");
-
-  const sessionsLabel = (k) => {
-
-    if (k==="illimite") return "Illimité";
-
-    if (k==="0") return "0 session";
-
-    return k + " sessions/an";
-
-  };
-
-
-
-  function campusPrice(dKey, sKey){
-
-    const d = (dKey==="illimite") ? Infinity : Number(dKey);
-
-    const s = (sKey==="illimite") ? Infinity : Number(sKey);
-
-    if (!isFinite(d) || !isFinite(s)) return null;
-
-    if (d<=10 && s<=25) return CAMPUS_PRICES.base;
-
-    if (d<=25 && s<=75) return CAMPUS_PRICES.mid;
-
-    return CAMPUS_PRICES.high;
-
-  }
-
-
-
-  function readState(){
-
-    return {
-
-      dossiers: el("dossiers").value,
-
-      sessions: el("sessions").value,
-
-      alertsExpiration: el("alertsExpiration").checked,
-
-      realTime: el("realTime").checked,
-
-      exportData: el("exportData").checked,
-
-      needsSessions: el("needsSessions").checked,
-
-      complianceByDates: el("complianceByDates").checked,
-
-      filterEssential: el("filterEssential").checked,
-
-      filterSoon: el("filterSoon").checked,
-
-      filterSlow: el("filterSlow").checked,
-
-      trainerDb: el("trainerDb").checked,
-
-      advancedAi: el("advancedAi").checked,
-
-      coordinator: el("coordinator").checked,
-
-      prioritySupport: el("prioritySupport").checked
-
-    };
-
-  }
-
-
-
-  function recommend(state){
-
-    const anySurMesure = state.trainerDb || state.advancedAi || state.coordinator || state.prioritySupport;
-
-    const huge = (state.dossiers==="illimite") || (state.sessions==="illimite");
-
-    if (anySurMesure || huge) return "groupe";
-
-    const wantsSession = state.needsSessions || state.complianceByDates || (state.sessions !== "0");
-
-    if (wantsSession) return "campus";
-
-    return "etablissement";
-
-  }
-
-
-
-  function featuresCommon(state){
-
-    const out = [];
-
-    if (state.alertsExpiration) out.push("Alertes d’expiration");
-
-    if (state.realTime) out.push("Suivi en temps réel");
-
-    if (state.exportData) out.push("Export des données");
-
-    return out.length ? out : ["Socle standard"];
-
-  }
-
-
-
-  function setList(listId, items){
-
-    const ul = el(listId);
-
-    ul.innerHTML = "";
-
-    items.forEach(t => {
-
-      const li = document.createElement("li");
-
-      li.textContent = t;
-
-      ul.appendChild(li);
-
-    });
-
-  }
-
-
-
-  function setKpis(kpiId, items){
-
-    const box = el(kpiId);
-
-    box.innerHTML = "";
-
-    items.forEach(t => {
-
-      const span = document.createElement("span");
-
-      span.className = "tag";
-
-      span.textContent = t;
-
-      box.appendChild(span);
-
-    });
-
-  }
-
-
-
-  function render(){
-
-    const s = readState();
-
-
-
-    if (s.sessions === "0") {
-
-      el("needsSessions").checked = false;
-
-      el("complianceByDates").checked = false;
-
+      // Sinon rester Campus
+      return "campus";
     }
 
-
-
-    const plan = recommend(s);
-
-
-
-    el("cardEtab").classList.toggle("selected", plan==="etablissement");
-
-    el("cardCampus").classList.toggle("selected", plan==="campus");
-
-    el("cardGroupe").classList.toggle("selected", plan==="groupe");
-
-
-
-    el("pillPlan").textContent = plan==="etablissement" ? "Établissement" : (plan==="campus" ? "Campus" : "Groupe");
-
-    el("pillMode").textContent = "par paliers";
-
-
-
-    const etabPrice = PRICE_ETAB[s.dossiers] ?? 49;
-
-    const cPrice = campusPrice(s.dossiers, s.sessions);
-
-
-
-    el("priceEtab").textContent = etabPrice + "€";
-
-    el("priceCampus").textContent = (cPrice===null ? "Sur mesure" : (cPrice + "€"));
-
-
-
-    setKpis("kpiEtab", [ "Volume : " + dossiersLabel(s.dossiers), "Sessions : non inclus" ]);
-
-    setKpis("kpiCampus", [ "Dossiers : " + dossiersLabel(s.dossiers), "Sessions : " + sessionsLabel(s.sessions) ]);
-
-    setKpis("kpiGroupe", [ "Volumétrie élevée", "Fonctionnalités spécifiques" ]);
-
-
-
-    setList("listEtab", [
-
-      ...featuresCommon(s),
-
-      "Dossiers formateurs",
-
-      "Statut global (sans contexte session)"
-
-    ]);
-
-
-
-    const campusFilters = [];
-
-    if (s.filterEssential) campusFilters.push("Criticité : documents essentiels");
-
-    if (s.filterSoon) campusFilters.push("Criticité : sessions proches");
-
-    if (s.filterSlow) campusFilters.push("Criticité : formateurs lents");
-
-    const campusBullets = [
-
-      ...featuresCommon(s),
-
-      "Sessions (start/end/status/type)",
-
-      "Conformité par dates (par session)",
-
-      "Alertes sans bruit (sessions actives/futures)",
-
-      "Checklist formateur par session",
-
-      ...campusFilters
-
-    ];
-
-    setList("listCampus", campusBullets);
-
-
-
-    const groupeBullets = [
-
-      "Dossiers & sessions illimités",
-
-      s.coordinator ? "Coordinateur dédié" : "Coordinateur dédié (option)",
-
-      s.trainerDb ? "Base de données formateurs" : "Base de données formateurs (option)",
-
-      s.advancedAi ? "Fonctions IA avancées" : "Fonctions IA avancées (option)",
-
-      s.prioritySupport ? "Support prioritaire & dédié" : "Support prioritaire & dédié (option)"
-
-    ];
-
-    setList("listGroupe", groupeBullets);
-
-
-
-    el("footEtab").textContent = plan==="etablissement"
-
-      ? "Recommandé pour une gestion simple des dossiers sans sessions."
-
-      : "Choisissez ce plan si vous n’avez pas de missions datées à piloter.";
-
-
-
-    el("footCampus").textContent = plan==="campus"
-
-      ? "Recommandé pour piloter des missions datées et une conformité opposable."
-
-      : "Choisissez ce plan si vous voulez des alertes contextualisées par session.";
-
-
-
-    el("footGroupe").textContent = plan==="groupe"
-
-      ? "Recommandé pour les très gros volumes ou besoins spécifiques."
-
-      : "Choisissez ce plan si vous dépassez les paliers ou avez des options sur mesure.";
-
-  }
-
-
-
-  ["dossiers","sessions","alertsExpiration","realTime","exportData","needsSessions","complianceByDates","filterEssential","filterSoon","filterSlow","trainerDb","advancedAi","coordinator","prioritySupport"]
-
-    .forEach(id => el(id).addEventListener("change", render));
-
-
-
-  render();
-
-</script>
-
+    function renderReco() {
+      const reco = pickReco();
+
+      const recoPlan = qs("#recoPlan");
+      const recoText = qs("#recoText");
+      const btnApply = qs("#btnApply");
+
+      if (reco === "campus") {
+        recoPlan.textContent = "Rester sur Campus";
+        recoText.textContent =
+          "Vous conservez la conformité contractuelle par session (dates) et des alertes sans bruit. Recommandé si vous pilotez des missions datées.";
+        btnApply.textContent = "Rester sur Campus";
+      }
+      if (reco === "etab") {
+        recoPlan.textContent = "Passer à Établissement";
+        recoText.textContent =
+          "Vous n’avez pas besoin de sessions : le statut global par profil suffit. Downgrade conseillé pour simplifier et réduire le coût.";
+        btnApply.textContent = "Programmer le downgrade";
+      }
+      if (reco === "groupe") {
+        recoPlan.textContent = "Passer à Groupe";
+        recoText.textContent =
+          "Vos besoins dépassent un plan standard (volume, options ou sur-mesure). On vous recommande l’offre Groupe.";
+        btnApply.textContent = "Demander une offre Groupe";
+      }
+
+      // Si forçage actif, on l'indique subtilement
+      if (forcedPlan) {
+        qs("#hint").textContent = "Plan forcé : la suggestion suit votre sélection (vous pouvez revenir en arrière).";
+      } else {
+        qs("#hint").textContent = "Le downgrade vers Établissement s’applique généralement en fin de période (sessions conservées en lecture seule).";
+      }
+    }
+
+    function toast(msg){
+      const t = qs("#toast");
+      t.textContent = msg;
+      t.style.display = "block";
+      clearTimeout(window.__t);
+      window.__t = setTimeout(()=>{ t.style.display="none"; }, 1400);
+    }
+
+    function toggleCompare(open){
+      qs("#plans").style.display = open ? "grid" : "none";
+      qs("#btnCompare").textContent = open ? "Masquer" : "Voir / forcer un autre plan";
+    }
+
+    // Events
+    qsa('input[name="plus"]').forEach(i => i.addEventListener("change", () => {
+      forcedPlan = null;
+      clearForcedUI();
+      renderReco();
+    }));
+    qsa('input[name="moins"]').forEach(i => i.addEventListener("change", () => {
+      forcedPlan = null;
+      clearForcedUI();
+      renderReco();
+    }));
+
+    qs("#btnCompare").addEventListener("click", () => {
+      const open = qs("#plans").style.display !== "grid";
+      toggleCompare(open);
+    });
+
+    function clearForcedUI(){
+      qsa(".planCard").forEach(c => c.classList.remove("selected"));
+      qs("#cardCampus").classList.add("selected"); // état visuel par défaut (plan actuel)
+    }
+
+    qsa(".planCard").forEach(card => {
+      card.addEventListener("click", () => {
+        forcedPlan = card.dataset.plan;
+        qsa(".planCard").forEach(c => c.classList.remove("selected"));
+        card.classList.add("selected");
+        renderReco();
+        toast("Plan sélectionné");
+      });
+    });
+
+    qs("#btnApply").addEventListener("click", () => {
+      const reco = pickReco();
+      if (reco === "campus") toast("Vous restez sur Campus");
+      if (reco === "etab") toast("Downgrade programmé (fin de période)");
+      if (reco === "groupe") toast("Demande envoyée (Groupe)");
+    });
+
+    // Init
+    renderReco();
+  </script>
 </body>
-
 </html>
